@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:background="@drawable/green_pharmacy_sign"
+    android:focusable="false">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:id="@+id/description"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:background="#263238"
+        android:text="@string/app_description"/>
+    <TextView
+        android:id="@+id/scan_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textIsSelectable="true"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/selected_pharmacy"
+        android:textIsSelectable="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/scan_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:gravity="center"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/search_pharmacy"
+        android:id="@+id/btn_searchpharmacy"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/selected_pharmacy"
+        android:layout_marginTop="20dp"
+        android:background="#263238"
+        android:textColor="@android:color/background_light" />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/scan_qrcode"
+        android:onClick="scanQR"
+        android:id="@+id/btn_qrcode"
+        android:layout_above="@+id/btn_searchgooglemaps"
+        android:background="#263238"
+        android:clickable="true"
+        android:textColor="@android:color/background_light" />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/search_google_maps"
+        android:id="@+id/btn_searchgooglemaps"
+        android:onClick="searchMap"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_above="@+id/btn_selectsavedpharmacy"
+        android:background="#263238"
+        android:clickable="true"
+        android:textColor="@android:color/background_light" />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_saved_pharmacy"
+        android:id="@+id/btn_selectsavedpharmacy"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/background_light"
+        android:background="#263238" />
+
+</RelativeLayout>
