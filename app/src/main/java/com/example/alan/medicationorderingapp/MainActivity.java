@@ -40,6 +40,7 @@ public class MainActivity extends ActionBarActivity {
      * @param view view of the activity
      */
     public void scanQR(View view){
+
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
         integrator.setPrompt(String.valueOf(R.string.txt_scan_qrcode));
@@ -61,9 +62,9 @@ public class MainActivity extends ActionBarActivity {
 
         if (scanningResult != null) {
             //we have a result
-            String scanContent = scanningResult.getContents();
+           String scanContent = scanningResult.getContents();
 
-            // display it on screen
+            //display it on screen
             contentTxt.setText("MEDICATION REQUIRED: " + scanContent);
             contentTxt.setBackgroundResource(R.color.blue_grey);
 
@@ -80,13 +81,6 @@ public class MainActivity extends ActionBarActivity {
     public void searchMap(View view) {
         startActivity(new Intent(MainActivity.this, MapsActivity.class));
 
-    }
-
-    protected void onDestroy(){
-        super.onDestroy();
-
-        contentTxt = null;
-        selectedPharmacy = null;
     }
 
 }
