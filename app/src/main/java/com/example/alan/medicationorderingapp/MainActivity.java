@@ -1,6 +1,9 @@
 package com.example.alan.medicationorderingapp;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +18,8 @@ import com.google.zxing.integration.android.IntentResult;
 public class MainActivity extends ActionBarActivity {
     private TextView contentTxt, selectedPharmacy;
     private Button savedBtn;
+    private String name, medication;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +30,34 @@ public class MainActivity extends ActionBarActivity {
         selectedPharmacy = (TextView)findViewById(R.id.selected_pharmacy);
 
         Intent intent = getIntent();
-        String name = intent.getStringExtra("pharmacy");
+        name = intent.getStringExtra("pharmacy");
+        medication = intent.getStringExtra("code");
 
         if(name!=null){
             selectedPharmacy.setText("PHARMACY SELECTED: "+name);
             selectedPharmacy.setBackgroundResource(R.color.blue_grey);
         }
 
+        if(medication!=null){
+            contentTxt.setText("MEDICATION REQUIRED: " + medication);
+
+            Bundle b = new Bundle();
+            b.putString("med", contentTxt.getText().toString());
+
+        }
+
         savedBtn = (Button)findViewById(R.id.btn_selectsavedpharmacy);
+    }
+
+    public void onStop(){
+        super.onStop();
+
+    }
+
+    public void onResume(){
+        super.onResume();
+
+
     }
 
     /**
@@ -64,9 +89,10 @@ public class MainActivity extends ActionBarActivity {
             //we have a result
            String scanContent = scanningResult.getContents();
 
-            //display it on screen
-            contentTxt.setText("MEDICATION REQUIRED: " + scanContent);
-            contentTxt.setBackgroundResource(R.color.blue_grey);
+            //put the scan result in a new intent
+            Intent i = new Intent(getApplicationContext(),MainActivity.class);
+            i.putExtra("code",scanContent);
+            startActivity(i);
 
         }else{
             Toast toast = Toast.makeText(getApplicationContext(),"No scan data received!", Toast.LENGTH_LONG);
@@ -82,6 +108,5 @@ public class MainActivity extends ActionBarActivity {
         startActivity(new Intent(MainActivity.this, MapsActivity.class));
 
     }
-
 }
 
