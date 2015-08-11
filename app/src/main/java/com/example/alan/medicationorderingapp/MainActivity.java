@@ -1,11 +1,11 @@
 package com.example.alan.medicationorderingapp;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.internal.app.ToolbarActionBar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,8 +13,6 @@ import android.widget.TextView;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
-import org.w3c.dom.ProcessingInstruction;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -25,7 +23,7 @@ import java.io.IOException;
 public class MainActivity extends ActionBarActivity {
     private TextView contentTxt, selectedPharmacy;
     private Button savedBtn;
-    private String name, medication, file = "mydata";
+    private String name, file = "mydata";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,16 +35,11 @@ public class MainActivity extends ActionBarActivity {
 
         Intent intent = getIntent();
         name = intent.getStringExtra("pharmacy");
-       // medication = intent.getStringExtra("code");
-
-        //if(name!=null){
-           // selectedPharmacy.setText("PHARMACY SELECTED: "+name);
-           // selectedPharmacy.setBackgroundResource(R.color.blue_grey);
-      //  }
 
         if(name!=null){
 
             selectedPharmacy.setText("PHARMACY SELECTED: "+name);
+            selectedPharmacy.setBackgroundColor(Color.parseColor("#263238"));
 
             try {
                 FileInputStream fin = openFileInput(file);
@@ -57,6 +50,7 @@ public class MainActivity extends ActionBarActivity {
                     temp = temp + Character.toString((char)c);
                 }
                 contentTxt.setText("MEDICATION REQUIRED: " + temp);
+                contentTxt.setBackgroundColor(Color.parseColor("#263238"));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -66,7 +60,6 @@ public class MainActivity extends ActionBarActivity {
 
         savedBtn = (Button)findViewById(R.id.btn_selectsavedpharmacy);
     }
-
 
     /**
      * event handler for scan button
@@ -107,9 +100,13 @@ public class MainActivity extends ActionBarActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-           // Intent i = new Intent(getApplicationContext(),MainActivity.class);
-           // i.putExtra("code",scanContent);
-           // startActivity(i);
+
+            Toast toast = Toast.makeText(getApplicationContext(),"Medication recorded. Now select pharmacy", Toast.LENGTH_LONG);
+            toast.getView().setBackgroundColor(Color.WHITE);
+            TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+            v.setTextColor(Color.BLACK);
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
 
         }else{
             Toast toast = Toast.makeText(getApplicationContext(),"No scan data received!", Toast.LENGTH_LONG);

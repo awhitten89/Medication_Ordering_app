@@ -82,7 +82,7 @@ public class MapsActivity extends FragmentActivity {
         double Botanic_lng = -5.932073;
 
         LatLng latLng = new LatLng(latitude, longitude);
-        float zoom_level = 16;
+        float zoom_level = 14;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom_level));
 
         mMap.addMarker(new MarkerOptions().position(new LatLng(McMullans_lat, McMullans_lng)).title("McMullans Pharmacy").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pharmacy_green_cross)));
