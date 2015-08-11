@@ -14,12 +14,18 @@ import android.widget.TextView;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.w3c.dom.ProcessingInstruction;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 
 public class MainActivity extends ActionBarActivity {
     private TextView contentTxt, selectedPharmacy;
     private Button savedBtn;
-    private String name, medication;
-
+    private String name, medication, file = "mydata";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,34 +37,36 @@ public class MainActivity extends ActionBarActivity {
 
         Intent intent = getIntent();
         name = intent.getStringExtra("pharmacy");
-        medication = intent.getStringExtra("code");
+       // medication = intent.getStringExtra("code");
+
+        //if(name!=null){
+           // selectedPharmacy.setText("PHARMACY SELECTED: "+name);
+           // selectedPharmacy.setBackgroundResource(R.color.blue_grey);
+      //  }
 
         if(name!=null){
+
             selectedPharmacy.setText("PHARMACY SELECTED: "+name);
-            selectedPharmacy.setBackgroundResource(R.color.blue_grey);
-        }
 
-        if(medication!=null){
-            contentTxt.setText("MEDICATION REQUIRED: " + medication);
+            try {
+                FileInputStream fin = openFileInput(file);
+                int c;
+                String temp = "";
 
-            Bundle b = new Bundle();
-            b.putString("med", contentTxt.getText().toString());
-
+                while ((c = fin.read())!=-1){
+                    temp = temp + Character.toString((char)c);
+                }
+                contentTxt.setText("MEDICATION REQUIRED: " + temp);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         savedBtn = (Button)findViewById(R.id.btn_selectsavedpharmacy);
     }
 
-    public void onStop(){
-        super.onStop();
-
-    }
-
-    public void onResume(){
-        super.onResume();
-
-
-    }
 
     /**
      * event handler for scan button
@@ -90,9 +98,18 @@ public class MainActivity extends ActionBarActivity {
            String scanContent = scanningResult.getContents();
 
             //put the scan result in a new intent
-            Intent i = new Intent(getApplicationContext(),MainActivity.class);
-            i.putExtra("code",scanContent);
-            startActivity(i);
+            try {
+                FileOutputStream fout = openFileOutput(file, MODE_WORLD_READABLE);
+                fout.write(scanContent.getBytes());
+                fout.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+           // Intent i = new Intent(getApplicationContext(),MainActivity.class);
+           // i.putExtra("code",scanContent);
+           // startActivity(i);
 
         }else{
             Toast toast = Toast.makeText(getApplicationContext(),"No scan data received!", Toast.LENGTH_LONG);
