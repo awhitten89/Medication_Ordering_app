@@ -42,7 +42,6 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:gravity="center"/>
-
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -52,6 +51,8 @@
         android:layout_below="@+id/selected_pharmacy"
         android:layout_marginTop="20dp"
         android:background="#263238"
+        android:onClick="searchStock"
+        android:clickable="true"
         android:textColor="@android:color/background_light" />
     <Button
         android:layout_width="fill_parent"

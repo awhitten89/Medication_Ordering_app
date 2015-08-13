@@ -122,5 +122,32 @@ public class MainActivity extends ActionBarActivity {
         startActivity(new Intent(MainActivity.this, MapsActivity.class));
 
     }
+
+    /**
+     * Event handler for the search stock button. Which calla the stack query class.
+     * Sends the information about the medication and pharmacy to class which will
+     * carry out the search.
+     * @param view
+     */
+    public void searchStock(View view){
+
+        String pharmacy = selectedPharmacy.getText().toString();
+
+        String whole = contentTxt.getText().toString();
+        String[] separated = whole.split("_");
+        String id = separated[0];
+        String medication = separated[1];
+        String potency = separated[2];
+        String quantity = separated[3];
+
+        Intent dataIntent = new Intent(getApplicationContext(), StockQuery.class);
+        dataIntent.putExtra("pharmacy", pharmacy);
+        dataIntent.putExtra("id", id);
+        dataIntent.putExtra("medication", medication);
+        dataIntent.putExtra("potency", potency);
+        dataIntent.putExtra("quantity", quantity);
+
+        startActivity(dataIntent);
+    }
 }
 
