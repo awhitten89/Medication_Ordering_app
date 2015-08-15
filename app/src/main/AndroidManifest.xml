@@ -41,7 +41,8 @@
         </activity>
         <activity android:name=".Pop"
             android:theme="@style/AppTheme.CustomTheme">
-
+        </activity>
+        <activity android:name=".StockQuery">
         </activity>
     </application>
 

@@ -131,23 +131,33 @@ public class MainActivity extends ActionBarActivity {
      */
     public void searchStock(View view){
 
-        String pharmacy = selectedPharmacy.getText().toString();
+        if(selectedPharmacy!=null && contentTxt!=null) {
+            String pharmacy = selectedPharmacy.getText().toString();
 
-        String whole = contentTxt.getText().toString();
-        String[] separated = whole.split("_");
-        String id = separated[0];
-        String medication = separated[1];
-        String potency = separated[2];
-        String quantity = separated[3];
+            String whole = contentTxt.getText().toString();
+            String[] separated = whole.split("_");
+            String id = separated[0];
+            String medication = separated[1];
+            String potency = separated[2];
+            String quantity = separated[3];
 
-        Intent dataIntent = new Intent(getApplicationContext(), StockQuery.class);
-        dataIntent.putExtra("pharmacy", pharmacy);
-        dataIntent.putExtra("id", id);
-        dataIntent.putExtra("medication", medication);
-        dataIntent.putExtra("potency", potency);
-        dataIntent.putExtra("quantity", quantity);
+            Intent dataIntent = new Intent(getApplicationContext(), StockQuery.class);
+            dataIntent.putExtra("pharmacy", pharmacy);
+            dataIntent.putExtra("id", id);
+            dataIntent.putExtra("medication", medication);
+            dataIntent.putExtra("potency", potency);
+            dataIntent.putExtra("quantity", quantity);
 
-        startActivity(dataIntent);
+            startActivity(dataIntent);
+
+        } else {
+            Toast toast = Toast.makeText(getApplicationContext(), "Unable to search please select medication and pharmacy", Toast.LENGTH_LONG);
+            toast.getView().setBackgroundColor(Color.WHITE);
+            TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+            v.setTextColor(Color.BLACK);
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
+        }
     }
 }
 
