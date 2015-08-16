@@ -4,14 +4,19 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -64,23 +69,35 @@ public class StockQuery extends Activity {
             String potency = intent.getStringExtra("potency");
             String quantity = intent.getStringExtra("quantity");
 
-            ContentValues values = new ContentValues();
-            values.put("pharmacy", pharmacy);
-            values.put("id", id);
-            values.put("name", name);
-            values.put("potency", potency);
-            values.put("quantity", quantity);
-
-            byte[] postData = values.toString().getBytes();
             try {
 
                 url = new URL("http://192.168.0.9:80/webservice/database_con.php");
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
+                conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
                 conn.setDoInput(true);
-                conn.getOutputStream().write(postData);
+
+                Uri.Builder builder = new Uri.Builder()
+                        .appendQueryParameter("pharmacy", pharmacy)
+                        .appendQueryParameter("id", id)
+                        .appendQueryParameter("name", name)
+                        .appendQueryParameter("potency", potency)
+                        .appendQueryParameter("quantity", quantity);
+
+                String query = builder.build().getQuery();
+
+                OutputStream os = conn.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os)
+                );
+
+                writer.write(query);
+                writer.flush();
+                writer.close();
+                os.close();
+
+                conn.connect();
 
                 InputStream is = new BufferedInputStream(conn.getInputStream());
                 result = readStream(is);
