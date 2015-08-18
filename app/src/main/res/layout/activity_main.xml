@@ -84,6 +84,8 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="5dp"
+        android:onClick="searchFavourites"
+        android:clickable="true"
         android:textColor="@android:color/background_light"
         android:background="#263238" />
 

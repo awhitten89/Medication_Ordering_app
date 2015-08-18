@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.internal.app.ToolbarActionBar;
 import android.view.Gravity;
 import android.view.View;
@@ -20,9 +21,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
     private TextView contentTxt, selectedPharmacy;
-    private Button savedBtn;
     private String name, file = "mydata";
 
     @Override
@@ -57,8 +57,6 @@ public class MainActivity extends ActionBarActivity {
                 e.printStackTrace();
             }
         }
-
-        savedBtn = (Button)findViewById(R.id.btn_selectsavedpharmacy);
     }
 
     /**
@@ -121,6 +119,14 @@ public class MainActivity extends ActionBarActivity {
     public void searchMap(View view) {
         startActivity(new Intent(MainActivity.this, MapsActivity.class));
 
+    }
+
+    /**
+     *
+     * @param view
+     */
+    public void searchFavourites(View view){
+        startActivity(new Intent(MainActivity.this, Favourites.class));
     }
 
     /**

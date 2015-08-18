@@ -42,10 +42,12 @@ public class Pop extends Activity {
             @Override
             public void onClick(View v) {
                 Intent popIntent = new Intent(getApplicationContext(),MainActivity.class);
-
                 popIntent.putExtra("pharmacy",name);
-
                 startActivity(popIntent);
+
+                Intent popFav = new Intent(getApplicationContext(),Favourites.class);
+                popFav.putExtra("pharmacy",name);
+                startActivity(popFav);
             }
         });
     }
