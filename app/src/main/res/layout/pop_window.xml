@@ -11,13 +11,22 @@
         android:layout_centerHorizontal="true"
         android:textColor="@android:color/background_dark" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pop_pharmacyID"
+        android:layout_below="@+id/select_pharmacy"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/background_dark" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btn_select_pharmacy"
         android:layout_centerHorizontal="true"
         android:text="@string/select_pharmacy"
-        android:layout_below="@+id/select_pharmacy"
+        android:layout_below="@+id/pop_pharmacyID"
         android:layout_marginTop="20dp"
         />
 

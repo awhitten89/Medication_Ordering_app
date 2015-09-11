@@ -7,6 +7,7 @@
     android:background="@drawable/green_pharmacy_sign"
     android:focusable="false">
 
+    //Textview which gives the user instructions on how to use the app.
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,6 +17,8 @@
         android:textSize="15sp"
         android:background="#263238"
         android:text="@string/app_description"/>
+
+    //Textview which displays the medication the user requires.
     <TextView
         android:id="@+id/scan_content"
         android:layout_width="fill_parent"
@@ -29,6 +32,7 @@
         android:textSize="18sp"
         android:gravity="center"/>
 
+    //Textview which displays the pharmacy the user has selected.
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -42,6 +46,8 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:gravity="center"/>
+
+    //button which when clicked will call the activity which searches the selected pharmacies database.
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -54,6 +60,8 @@
         android:onClick="searchStock"
         android:clickable="true"
         android:textColor="@android:color/background_light" />
+
+    //button which when clicked will call the activity which scans the QR code
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -64,6 +72,8 @@
         android:background="#263238"
         android:clickable="true"
         android:textColor="@android:color/background_light" />
+
+    //button which when clicked will call the google maps activity.
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -76,6 +86,8 @@
         android:background="#263238"
         android:clickable="true"
         android:textColor="@android:color/background_light" />
+
+    //button which when clicked will call an activity which will allow the user toi seleced a pharmacy previously used.
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

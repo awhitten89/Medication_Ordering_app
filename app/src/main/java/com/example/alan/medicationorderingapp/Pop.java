@@ -13,7 +13,7 @@ import android.widget.TextView;
  */
 public class Pop extends Activity {
 
-    private TextView pharmacyQ;
+    private TextView pharmacyQ, pharmacyID;
     private Button yesBtn;
 
     @Override
@@ -31,12 +31,15 @@ public class Pop extends Activity {
         getWindow().setLayout(((int)(width*.8)),(int)(height*.6));
 
         pharmacyQ = (TextView)findViewById(R.id.select_pharmacy);
+        pharmacyID = (TextView)findViewById(R.id.pop_pharmacyID);
         yesBtn = (Button)findViewById(R.id.btn_select_pharmacy);
 
         final Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
+        final String id  = intent.getStringExtra("pharmacy id");
 
         pharmacyQ.setText("Select "+name);
+        pharmacyID.setText("Pharmacy ID: "+ id);
 
         yesBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -71,7 +71,7 @@ public class StockQuery extends Activity {
 
             try {
 
-                url = new URL("http://192.168.0.9:80/webservice/database_con.php");
+                url = new URL("http://www.awhitten89.byethost7.com/database_con.php");
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
