@@ -11,7 +11,35 @@ android:focusable="false">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
+        android:text="New Text"
+        android:id="@+id/A"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/B"
+        android:layout_below="@+id/A"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/C"
+        android:layout_below="@+id/B"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/D"
+        android:layout_below="@+id/C"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp" />
 </RelativeLayout>

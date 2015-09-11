@@ -28,29 +28,26 @@ public class Pop extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout(((int)(width*.8)),(int)(height*.6));
+        getWindow().setLayout(((int) (width * .8)), (int) (height * .6));
 
-        pharmacyQ = (TextView)findViewById(R.id.select_pharmacy);
-        pharmacyID = (TextView)findViewById(R.id.pop_pharmacyID);
-        yesBtn = (Button)findViewById(R.id.btn_select_pharmacy);
+        pharmacyQ = (TextView) findViewById(R.id.select_pharmacy);
+        pharmacyID = (TextView) findViewById(R.id.pop_pharmacyID);
+        yesBtn = (Button) findViewById(R.id.btn_select_pharmacy);
 
         final Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
-        final String id  = intent.getStringExtra("pharmacy id");
+        final String id = intent.getStringExtra("pharmacy id");
 
-        pharmacyQ.setText("Select "+name);
-        pharmacyID.setText("Pharmacy ID: "+ id);
+        pharmacyQ.setText("Select " + name);
+        pharmacyID.setText("Pharmacy ID: " + id);
 
         yesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent popIntent = new Intent(getApplicationContext(),MainActivity.class);
-                popIntent.putExtra("pharmacy",name);
+                Intent popIntent = new Intent(getApplicationContext(), MainActivity.class);
+                popIntent.putExtra("pharmacy name", name);
+                popIntent.putExtra("pharmacy id", id);
                 startActivity(popIntent);
-
-                Intent popFav = new Intent(getApplicationContext(),Favourites.class);
-                popFav.putExtra("pharmacy",name);
-                startActivity(popFav);
             }
         });
     }

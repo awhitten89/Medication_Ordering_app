@@ -23,7 +23,7 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private TextView contentTxt, selectedPharmacy;
-    private String name, file = "mydata";
+    private String pharmacy_name, pharmacy_id, file = "mydata";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +34,12 @@ public class MainActivity extends AppCompatActivity {
         selectedPharmacy = (TextView)findViewById(R.id.selected_pharmacy);
 
         Intent intent = getIntent();
-        name = intent.getStringExtra("pharmacy");
+        pharmacy_name = intent.getStringExtra("pharmacy name");
+        pharmacy_id = intent.getStringExtra("pharmacy id");
 
-        if(name!=null){
+        if(pharmacy_name!=null){
 
-            selectedPharmacy.setText("PHARMACY SELECTED: "+name);
+            selectedPharmacy.setText("PHARMACY SELECTED: "+pharmacy_name);
             selectedPharmacy.setBackgroundColor(Color.parseColor("#263238"));
 
             try {
@@ -122,14 +123,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param view
-     */
-    public void searchFavourites(View view){
-        startActivity(new Intent(MainActivity.this, Favourites.class));
-    }
-
-    /**
      * Event handler for the search stock button. Which calla the stack query class.
      * Sends the information about the medication and pharmacy to class which will
      * carry out the search.
@@ -138,20 +131,17 @@ public class MainActivity extends AppCompatActivity {
     public void searchStock(View view){
 
         if(selectedPharmacy!=null && contentTxt!=null) {
-            String pharmacy = selectedPharmacy.getText().toString();
 
             String whole = contentTxt.getText().toString();
             String[] separated = whole.split("_");
-            String id = separated[0];
+            String stock_id = separated[0];
             String medication = separated[1];
-            String potency = separated[2];
             String quantity = separated[3];
 
             Intent dataIntent = new Intent(getApplicationContext(), StockQuery.class);
-            dataIntent.putExtra("pharmacy", pharmacy);
-            dataIntent.putExtra("id", id);
+            dataIntent.putExtra("pharmacy id", pharmacy_id);
+            dataIntent.putExtra("stock id", stock_id);
             dataIntent.putExtra("medication", medication);
-            dataIntent.putExtra("potency", potency);
             dataIntent.putExtra("quantity", quantity);
 
             startActivity(dataIntent);
