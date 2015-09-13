@@ -48,38 +48,57 @@ public class StockQuery extends Activity {
     private void isStockAvailable(JSONArray jsonArray) {
 
         Intent intent = getIntent();
-        Integer pharmacy_id = Integer.valueOf (intent.getStringExtra("pharmacy id"));
+        Integer pharmacy_id = Integer.valueOf(intent.getStringExtra("pharmacy id"));
         Integer stock_id = Integer.valueOf (intent.getStringExtra("stock id"));
         String medication = intent.getStringExtra("medication");
         String pharmacy_name = intent.getStringExtra("pharmacy name");
-        Integer quantity = Integer.valueOf (intent.getStringExtra("quantity"));
+        Integer quantity = Integer.valueOf(intent.getStringExtra("quantity"));
+
+        Boolean flag = false;
 
         for (int i =0; i < jsonArray.length(); i++) {
 
-            try {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                int database_pharmacy_id = jsonObject.getInt("pharmacy_id");
-                int database_stock_id = jsonObject.getInt("stock_id");
+                try {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                if(database_pharmacy_id == pharmacy_id && database_stock_id == stock_id){
+                    int database_pharmacy_id = jsonObject.getInt("pharmacy_id");
+                    int database_stock_id = jsonObject.getInt("stock_id");
 
-                    Intent stockIntent = new Intent(getApplicationContext(), Medication_Available.class);
-                    stockIntent.putExtra("pharmacy id",pharmacy_id);
-                    stockIntent.putExtra("stock id", stock_id);
-                    stockIntent.putExtra("medication", medication);
-                    stockIntent.putExtra("quantity", quantity);
-                    stockIntent.putExtra("pharmacy name", pharmacy_name);
+                    //if else statement to check if the pharmacy has the medication in stock
+                    if(database_pharmacy_id == pharmacy_id && database_stock_id == stock_id){
+                        //flag becomes true if the database stock value is found
+                        flag = true;
+                        //break the for loop when flag is true.
+                        break;
 
-                    startActivity(stockIntent);
+                    } else {
+                        flag = false;
+                    }
 
-                } else {
-
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+        }
+    //if else statement which calls the appropriate class depending on whether the database has the users medication.
+    if (flag){
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            Intent stockIntent = new Intent(getApplicationContext(), Medication_Available.class);
+            stockIntent.putExtra("pharmacy id",pharmacy_id);
+            stockIntent.putExtra("stock id", stock_id);
+            stockIntent.putExtra("medication", medication);
+            stockIntent.putExtra("quantity", quantity);
+            stockIntent.putExtra("pharmacy name", pharmacy_name);
+
+            startActivity(stockIntent);
+
+        } else {
+
+            Intent notAvailIntent = new Intent(getApplicationContext(), NotAvailable.class);
+            notAvailIntent.putExtra("medication", medication);
+            notAvailIntent.putExtra("pharmacy name", pharmacy_name);
+
+            startActivity(notAvailIntent);
         }
     }
 

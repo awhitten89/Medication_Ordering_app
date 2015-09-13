@@ -48,6 +48,12 @@
         <activity android:name=".Medication_Available"
             android:theme="@style/AppTheme.AvailableTheme">
         </activity>
+        <activity android:name=".NotAvailable"
+            android:theme="@style/AppTheme.AvailableTheme">
+        </activity>
+        <activity android:name=".updateDatabase"
+            android:theme="@style/AppTheme.AvailableTheme">
+        </activity>
     </application>
 
 </manifest>

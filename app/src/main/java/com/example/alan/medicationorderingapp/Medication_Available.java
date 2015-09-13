@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -50,6 +51,20 @@ public class Medication_Available extends Activity {
 
         available.setText(medication + " is available at " + pharmacy_name);
         reserve.setText("Would you like to reserve it?");
+    }
+
+    public void cancel(View view) {
+        startActivity(new Intent(Medication_Available.this, MainActivity.class));
+    }
+
+    public void medication_reserve(View view) {
+
+        Intent pharmacyInfo = new Intent(getApplicationContext(), updateDatabase.class);
+        pharmacyInfo.putExtra("pharmacy id", pharmacy_id);
+        pharmacyInfo.putExtra("stock id", stock_id);
+        pharmacyInfo.putExtra("quantity", quantity);
+
+        startActivity(pharmacyInfo);
     }
 
 }
