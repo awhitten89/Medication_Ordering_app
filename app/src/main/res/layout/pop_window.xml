@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@android:color/background_light">
+    android:background="#263238">
 
     <TextView
         android:layout_width="wrap_content"
@@ -9,7 +9,8 @@
         android:id="@+id/select_pharmacy"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:textColor="@android:color/background_dark" />
+        android:textSize="20sp"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,7 +19,8 @@
         android:layout_below="@+id/select_pharmacy"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:textColor="@android:color/background_dark" />
+        android:textSize="20sp"
+        android:textColor="@android:color/white" />
 
     <Button
         android:layout_width="wrap_content"
@@ -28,6 +30,6 @@
         android:text="@string/select_pharmacy"
         android:layout_below="@+id/pop_pharmacyID"
         android:layout_marginTop="20dp"
-        />
+        android:textColor="@android:color/white"/>
 
 </RelativeLayout>

@@ -15,4 +15,5 @@
     by selecting one previously used.\n\n3. Search the pharmacy\'s stock and reserve your medication for collection.</string>
     <string name="meds_required">Medication Required:</string>
     <string name="pharmacy_chosen">Pharmacy Selected:</string>
+    <string name="cancel">Cancel</string>
 </resources>

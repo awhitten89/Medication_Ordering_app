@@ -23,7 +23,7 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private TextView contentTxt, selectedPharmacy;
-    private String pharmacy_name, pharmacy_id, file = "mydata";
+    private String pharmacy_name, pharmacy_id, file = "mydata", temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 FileInputStream fin = openFileInput(file);
                 int c;
-                String temp = "";
+                temp = "";
 
                 while ((c = fin.read())!=-1){
                     temp = temp + Character.toString((char)c);
@@ -132,13 +132,13 @@ public class MainActivity extends AppCompatActivity {
 
         if(selectedPharmacy!=null && contentTxt!=null) {
 
-            String whole = contentTxt.getText().toString();
-            String[] separated = whole.split("_");
+            String[] separated = temp.split("_");
             String stock_id = separated[0];
             String medication = separated[1];
             String quantity = separated[3];
 
             Intent dataIntent = new Intent(getApplicationContext(), StockQuery.class);
+            dataIntent.putExtra("pharmacy name", pharmacy_name);
             dataIntent.putExtra("pharmacy id", pharmacy_id);
             dataIntent.putExtra("stock id", stock_id);
             dataIntent.putExtra("medication", medication);

@@ -10,4 +10,8 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 
+    <style name="AppTheme.AvailableTheme">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
 </resources>

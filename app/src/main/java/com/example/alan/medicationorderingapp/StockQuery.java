@@ -32,19 +32,11 @@ import java.util.ArrayList;
  */
 public class StockQuery extends Activity {
 
-    TextView a,b,c,d;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.stock_query);
-
-        a = (TextView)findViewById(R.id.A);
-        b = (TextView)findViewById(R.id.B);
-        c = (TextView)findViewById(R.id.C);
-        d = (TextView)findViewById(R.id.D);
-
         new GetStockAvailable().execute(new Stock_Connector());
 
     }
@@ -56,19 +48,38 @@ public class StockQuery extends Activity {
     private void isStockAvailable(JSONArray jsonArray) {
 
         Intent intent = getIntent();
-        String pharmacy_id = intent.getStringExtra("pharmacy id");
-        String stock_id = intent.getStringExtra("stock id");
+        Integer pharmacy_id = Integer.valueOf (intent.getStringExtra("pharmacy id"));
+        Integer stock_id = Integer.valueOf (intent.getStringExtra("stock id"));
         String medication = intent.getStringExtra("medication");
-        String quantity = intent.getStringExtra("quantity");
-
-        a.setText(pharmacy_id);
-        b.setText(stock_id);
-        c.setText(medication);
-        d.setText(quantity);
+        String pharmacy_name = intent.getStringExtra("pharmacy name");
+        Integer quantity = Integer.valueOf (intent.getStringExtra("quantity"));
 
         for (int i =0; i < jsonArray.length(); i++) {
 
+            try {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
 
+                int database_pharmacy_id = jsonObject.getInt("pharmacy_id");
+                int database_stock_id = jsonObject.getInt("stock_id");
+
+                if(database_pharmacy_id == pharmacy_id && database_stock_id == stock_id){
+
+                    Intent stockIntent = new Intent(getApplicationContext(), Medication_Available.class);
+                    stockIntent.putExtra("pharmacy id",pharmacy_id);
+                    stockIntent.putExtra("stock id", stock_id);
+                    stockIntent.putExtra("medication", medication);
+                    stockIntent.putExtra("quantity", quantity);
+                    stockIntent.putExtra("pharmacy name", pharmacy_name);
+
+                    startActivity(stockIntent);
+
+                } else {
+
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
