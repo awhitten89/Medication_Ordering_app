@@ -3,27 +3,52 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="#263238">
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
+        android:id="@+id/text"
+        android:text="@string/updateText"
         android:textColor="@android:color/white"
-        android:ems="10"
-        android:id="@+id/enter_name"
+        android:textSize="15sp"
+        android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp" />
+        android:layout_marginTop="80dp"/>
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
+        android:inputType="textPersonName"
+        android:text="@string/name"
+        android:background="@android:color/white"
+        android:textColor="@android:color/black"
+        android:ems="10"
+        android:id="@+id/enter_name"
+        android:layout_below="@+id/text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
         android:inputType="phone"
-        android:text="Phone"
-        android:textColor="@android:color/white"
+        android:text="@string/phone"
+        android:background="@android:color/white"
+        android:textColor="@android:color/black"
         android:ems="10"
         android:id="@+id/enter_phone"
         android:layout_below="@+id/enter_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp" />
+
+    <Button
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_submit"
+        android:text="@string/submit"
+        android:textColor="@android:color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/enter_phone"
+        android:layout_marginTop="20dp"
+        android:onClick="submit"/>
 </RelativeLayout>

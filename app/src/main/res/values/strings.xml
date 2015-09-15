@@ -17,4 +17,8 @@
     <string name="pharmacy_chosen">Pharmacy Selected:</string>
     <string name="cancel">Cancel</string>
     <string name="ok">Ok</string>
+    <string name="updateText">Please enter your name and phone number</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="submit">Submit</string>
 </resources>
