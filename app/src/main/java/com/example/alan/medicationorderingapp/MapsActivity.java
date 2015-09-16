@@ -79,8 +79,8 @@ public class MapsActivity extends FragmentActivity {
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Intent intent = new Intent(getApplicationContext(), Pop.class);
 
+                Intent intent = new Intent(getApplicationContext(), Pop.class);
                 intent.putExtra("name", marker.getTitle());
                 intent.putExtra("pharmacy id", marker.getSnippet());
 

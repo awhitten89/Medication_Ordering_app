@@ -26,12 +26,9 @@ public class httpManager {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod(p.getMethod());
 
-            JSONObject json = new JSONObject(p.getParams());
-            String params = "params=" + json.toString();
-
             con.setDoOutput(true);
             OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
-            wr.write(params);
+            wr.write(p.getEncodedParams());
             wr.flush();
 
             StringBuilder sb = new StringBuilder();

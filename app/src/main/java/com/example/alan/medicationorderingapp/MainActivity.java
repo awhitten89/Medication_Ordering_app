@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             //we have a result
            String scanContent = scanningResult.getContents();
 
-            //put the scan result in a new intent
+            //put the scan result in a new file
             try {
                 FileOutputStream fout = openFileOutput(file, MODE_WORLD_READABLE);
                 fout.write(scanContent.getBytes());
@@ -155,5 +155,6 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
         }
     }
+
 }
 

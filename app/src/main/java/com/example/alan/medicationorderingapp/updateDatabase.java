@@ -2,20 +2,16 @@ package com.example.alan.medicationorderingapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashMap;
 
 /**
  * Created by Alan on 13/09/2015.
@@ -44,13 +40,9 @@ public class updateDatabase extends Activity {
         getWindow().setLayout(((int) (width * .8)), (int) (height * .6));
 
         Intent intent = getIntent();
-        pharmacy_id = intent.getIntExtra("pharmacy_id",0);
-        stock_id = intent.getIntExtra("stock_id",0);
-        quantity = intent.getIntExtra("quantity",0);
-
-        entered_name = name.getText().toString();
-        entered_phone = phone.getText().toString();
-
+        pharmacy_id = intent.getIntExtra("pharmacy id",0);
+        stock_id = intent.getIntExtra("stock id", 0);
+        quantity = intent.getIntExtra("quantity", 0);
 
     }
 
@@ -59,9 +51,20 @@ public class updateDatabase extends Activity {
 
         requestData("http://awhitten02.students.cs.qub.ac.uk/update_database.php");
 
+        Toast toast = Toast.makeText(getApplicationContext(),"Medication reserved in pharmacy", Toast.LENGTH_LONG);
+        toast.getView().setBackgroundColor(Color.WHITE);
+        TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+        v.setTextColor(Color.BLACK);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+
+        startActivity(new Intent(updateDatabase.this, MainActivity.class));
     }
 
     private void requestData(String uri) {
+
+        entered_name = name.getText().toString();
+        entered_phone = phone.getText().toString();
 
         requestPackage p = new requestPackage();
         p.setMethod("POST");
