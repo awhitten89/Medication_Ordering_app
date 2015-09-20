@@ -8,11 +8,10 @@
     <string name="title_activity_maps">Map</string>
     <string name="search_pharmacy">search stock</string>
     <string name="select_saved_pharmacy">select saved pharmacy</string>
-    <string name="search_google_maps">search google maps</string>
+    <string name="search_google_maps">search for pharmacy</string>
     <string name="select_pharmacy">Yes</string>
     <string name="title_activity_gmaps">Map</string>
-    <string name="app_description">1. Scan the QR code on your prescription.\n\n2. Select a pharmacy by searching google maps or
-    by selecting one previously used.\n\n3. Search the pharmacy\'s stock and reserve your medication for collection.</string>
+    <string name="app_description">1. Scan the QR code on your prescription.\n\n2. Select a pharmacy by searching google maps.\n\n3. Search the pharmacy\'s stock and reserve your medication for collection.</string>
     <string name="meds_required">Medication Required:</string>
     <string name="pharmacy_chosen">Pharmacy Selected:</string>
     <string name="cancel">Cancel</string>

@@ -64,7 +64,7 @@ public class StockQuery extends Activity {
 
                     int database_pharmacy_id = jsonObject.getInt("pharmacy_id");
                     int database_stock_id = jsonObject.getInt("stock_id");
-                    int database_quantity = jsonObject.getInt("quantity");
+                    int database_quantity = jsonObject.getInt("drug_quantity");
 
                     //if else statement to check if the pharmacy has the medication in stock and if it has the right quantity
                     if(database_pharmacy_id == pharmacy_id && database_stock_id == stock_id && database_quantity >= quantity){

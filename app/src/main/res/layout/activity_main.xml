@@ -82,23 +82,9 @@
         android:onClick="searchMap"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:layout_above="@+id/btn_selectsavedpharmacy"
+        android:layout_alignParentBottom="true"
         android:background="#263238"
         android:clickable="true"
         android:textColor="@android:color/background_light" />
-
-    //button which when clicked will call an activity which will allow the user toi seleced a pharmacy previously used.
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/select_saved_pharmacy"
-        android:id="@+id/btn_selectsavedpharmacy"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="5dp"
-        android:onClick="searchFavourites"
-        android:clickable="true"
-        android:textColor="@android:color/background_light"
-        android:background="#263238" />
 
 </RelativeLayout>
