@@ -13,6 +13,7 @@ import java.net.URL;
 
 /**
  * Created by Alan on 11/09/2015.
+ * Class which send a http request to a PHP script on the server
  */
 public class Stock_Connector {
 
@@ -21,20 +22,22 @@ public class Stock_Connector {
         BufferedReader reader = null;
         JSONArray jsonArray = null;
         try {
+            //opens the URL connection and established an http connection
             URL url = new URL("http://awhitten02.students.cs.qub.ac.uk/search_stock.php");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
+            //input stream to receive data from the database
             InputStream inputStream = con.getInputStream();
-
+            //new string builder to get the result
             StringBuilder sb = new StringBuilder();
             reader = new BufferedReader(new InputStreamReader(inputStream));
 
             String line;
+            //while loop to record the results and append then to the string builder
             while ((line = reader.readLine())!= null) {
-
                 sb.append(line);
             }
-
+            //puts the results in a JSON array
             jsonArray = new JSONArray(sb.toString());
 
         } catch (MalformedURLException e) {

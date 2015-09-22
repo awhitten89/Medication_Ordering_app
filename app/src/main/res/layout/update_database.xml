@@ -11,9 +11,9 @@
         android:textColor="@android:color/white"
         android:textSize="15sp"
         android:gravity="center"
-        android:layout_alignParentTop="true"
+
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"/>
+        android:layout_above="@+id/enter_name"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -24,9 +24,9 @@
         android:textColor="@android:color/black"
         android:ems="10"
         android:id="@+id/enter_name"
-        android:layout_below="@+id/text"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp" />
+        android:layout_above="@+id/enter_phone"
+        android:layout_marginTop="20dp"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -37,9 +37,9 @@
         android:textColor="@android:color/black"
         android:ems="10"
         android:id="@+id/enter_phone"
-        android:layout_below="@+id/enter_name"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        android:layout_centerVertical="true"
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:layout_width="100sp"

@@ -74,8 +74,11 @@ public class MapsActivity extends FragmentActivity {
         float zoom_level = 14;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom_level));
 
+        //executes the async tack and instantiates the api connector class
         new GetMarkers().execute(new API_Connector());
 
+        //makes the markers selectable and sends the information about the pharmacy to the pop up
+        // via an intent
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -92,16 +95,19 @@ public class MapsActivity extends FragmentActivity {
 }
 
     /**
-     *
+     * receives the json array from the async task and uses it to plot the maps markers
      * @param jsonArray
      */
     private void setMapMarkers(JSONArray jsonArray) {
 
+        //iterate through the array.
         for (int i = 0; i < jsonArray.length(); i++) {
 
             try {
+                //gets each object from the array
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
+                //uses the object keys to get the values to plot on the map.
                 mMap.addMarker(new MarkerOptions()
                         .title(jsonObject.getString("name"))
                         .position(new LatLng(
@@ -109,6 +115,7 @@ public class MapsActivity extends FragmentActivity {
                                 jsonObject.getDouble("lng")
                         ))
                         .snippet(String.valueOf(jsonObject.getInt("pharmacy_id")))
+                        // makes the marker icon a pharmacy green cross
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pharmacy_green_cross)));
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -117,17 +124,24 @@ public class MapsActivity extends FragmentActivity {
     }
 
     /**
-     *
+     * asynchronus task method to perform the database connection on a separate thread
      */
     private class GetMarkers extends AsyncTask<API_Connector,Long,JSONArray> {
 
         @Override
+        /**
+         * background method which implements the api connector class
+         */
         protected JSONArray doInBackground(API_Connector... params) {
 
             return params[0].PlotGoogleMarkers();
         }
 
         @Override
+        /**
+         * method which receives the results from the background method and passes
+         * it to the setupmarkers method
+         */
         protected void onPostExecute(JSONArray jsonArray) {
             super.onPostExecute(jsonArray);
 

@@ -2,13 +2,10 @@ package com.example.alan.medicationorderingapp;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.internal.app.ToolbarActionBar;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 import android.widget.TextView;
 
@@ -61,60 +58,65 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * event handler for scan button
+     * event handler for scan button instantiates an instance of the Intent Integrator and
+     * send an Intent to the barcode scanner of the device.
      * @param view view of the activity
      */
     public void scanQR(View view){
 
+        //create an instance of the integrator class which
+        // will send the scan intent to the devices barcode scanner
         IntentIntegrator integrator = new IntentIntegrator(this);
+        //sets the type of code that will be scanned
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
         integrator.setPrompt(String.valueOf(R.string.txt_scan_qrcode));
         integrator.setResultDisplayDuration(0);
-        integrator.setCameraId(0);  // Use a specific camera of the device
-        integrator.initiateScan();
+        integrator.setCameraId(0);// Use a specific camera of the device
+        integrator.initiateScan();//starts the scan
     }
 
 
     /**
-     * function handle scan result
+     * function handle scan result receives the intent from the scanned activity
      * @param requestCode scanned code
      * @param resultCode  result of scanned code
      * @param intent intent
      */
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        //retrieve scan result
+
+        //retrieve scan result and parse it into an instance of the intent result class
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
 
+        //check we have a result
         if (scanningResult != null) {
-            //we have a result
+            //save the result to a string variable
            String scanContent = scanningResult.getContents();
-
             //put the scan result in a new file
             try {
                 FileOutputStream fout = openFileOutput(file, MODE_WORLD_READABLE);
-                fout.write(scanContent.getBytes());
+                fout.write(scanContent.getBytes());//write the result to the file
                 fout.close();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+            //Toast message to inform the user that the database has been recorded.
             Toast toast = Toast.makeText(getApplicationContext(),"Medication recorded. Now select pharmacy", Toast.LENGTH_LONG);
             toast.getView().setBackgroundColor(Color.WHITE);
             TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
             v.setTextColor(Color.BLACK);
             toast.setGravity(Gravity.CENTER,0,0);
             toast.show();
-
         }else{
+            //if no result is recorded inform the user
             Toast toast = Toast.makeText(getApplicationContext(),"No scan data received!", Toast.LENGTH_LONG);
             toast.show();
         }
     }
 
     /**
-     * Event handler for the search google maps button
+     * Event handler for the search google maps button launches the maps activity
      * @param view
      */
     public void searchMap(View view) {
@@ -123,29 +125,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Event handler for the search stock button. Which calla the stack query class.
+     * Event handler for the search stock button. Which calls the stock query class.
      * Sends the information about the medication and pharmacy to class which will
      * carry out the search.
      * @param view
      */
     public void searchStock(View view){
 
+        //if statement checks that the medication has been recorded and the pharmacy selected
         if(selectedPharmacy!=null && contentTxt!=null) {
-
+            //separates the QR result string into individual elements
             String[] separated = temp.split("_");
             String stock_id = separated[0];
             String medication = separated[1];
             String quantity = separated[3];
-
+            //Intent sent to the stock query class giving it the iformation it needs to carry out the
+            //stock check.
             Intent dataIntent = new Intent(getApplicationContext(), StockQuery.class);
+            //pharmacy name and id have been returned to the main activity after selection on the map
             dataIntent.putExtra("pharmacy name", pharmacy_name);
             dataIntent.putExtra("pharmacy id", pharmacy_id);
             dataIntent.putExtra("stock id", stock_id);
             dataIntent.putExtra("medication", medication);
             dataIntent.putExtra("quantity", quantity);
-
+            //starts the StockQuery activity and sends the intent
             startActivity(dataIntent);
-
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "Unable to search please select medication and pharmacy", Toast.LENGTH_LONG);
             toast.getView().setBackgroundColor(Color.WHITE);

@@ -23,7 +23,7 @@
         android:textColor="@android:color/white" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="100sp"
         android:layout_height="wrap_content"
         android:id="@+id/btn_select_pharmacy"
         android:layout_centerHorizontal="true"

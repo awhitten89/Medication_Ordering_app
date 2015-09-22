@@ -12,7 +12,7 @@ import java.util.Map;
 public class requestPackage {
 
     private String uri;
-    private String method = "POST";
+    private String method = "POST";//type of method that will be used by the PHP script
     private Map<String, Object> params = new HashMap<>();
 
     public String getUri() {
@@ -42,23 +42,26 @@ public class requestPackage {
     public void setParam(String key, Object value) {
         params.put(key,value);
     }
-    
-    public String getEncodedParams() {
-        
-        StringBuilder sb = new StringBuilder();
 
+    /**
+     * Method to encode the values that makeup the hash map
+     * the values are encoded because they will be sent via http to the server
+     * @return encoded parameter
+     */
+    public String getEncodedParams() {
+        StringBuilder sb = new StringBuilder();
+        //iterate through the hash map
         for (String key: params.keySet()) {
             Object value = null;
             try {
+                //encode the params
                 value = URLEncoder.encode(String.valueOf(params.get(key)), "UTF-8");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-
             if(sb.length() > 0) {
                 sb.append("&");
             }
-
             sb.append(key + "=" + value);
         }
         return sb.toString();

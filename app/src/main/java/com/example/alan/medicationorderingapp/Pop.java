@@ -24,10 +24,9 @@ public class Pop extends Activity {
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-
+        //sets the pop up to cover 80% width and 60%
         getWindow().setLayout(((int) (width * .8)), (int) (height * .6));
 
         pharmacyQ = (TextView) findViewById(R.id.select_pharmacy);
