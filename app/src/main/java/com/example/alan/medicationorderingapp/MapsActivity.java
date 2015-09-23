@@ -56,13 +56,9 @@ public class MapsActivity extends FragmentActivity {
 
         //Enable my location
         mMap.setMyLocationEnabled(true);
-
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
         Criteria criteria = new Criteria();
-
         String provider = locationManager.getBestProvider(criteria, true);
-
         Location myLocation = locationManager.getLastKnownLocation(provider);
 
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -70,6 +66,7 @@ public class MapsActivity extends FragmentActivity {
         double latitude = myLocation.getLatitude();
         double longitude = myLocation.getLongitude();
 
+        //zoom the map to the users location
         LatLng latLng = new LatLng(latitude, longitude);
         float zoom_level = 14;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom_level));
@@ -77,13 +74,13 @@ public class MapsActivity extends FragmentActivity {
         //executes the async tack and instantiates the api connector class
         new GetMarkers().execute(new API_Connector());
 
-        //makes the markers selectable and sends the information about the pharmacy to the pop up
+        //makes the markers selectable and sends the information about the pharmacy to the confirm selection class
         // via an intent
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-
-                Intent intent = new Intent(getApplicationContext(), Pop.class);
+                //send the intent to the check availablity class
+                Intent intent = new Intent(getApplicationContext(), Confirm_selection.class);
                 intent.putExtra("name", marker.getTitle());
                 intent.putExtra("pharmacy id", marker.getSnippet());
 
@@ -128,20 +125,20 @@ public class MapsActivity extends FragmentActivity {
      */
     private class GetMarkers extends AsyncTask<API_Connector,Long,JSONArray> {
 
-        @Override
         /**
          * background method which implements the api connector class
          */
+        @Override
         protected JSONArray doInBackground(API_Connector... params) {
 
             return params[0].PlotGoogleMarkers();
         }
 
-        @Override
         /**
          * method which receives the results from the background method and passes
          * it to the setupmarkers method
          */
+        @Override
         protected void onPostExecute(JSONArray jsonArray) {
             super.onPostExecute(jsonArray);
 

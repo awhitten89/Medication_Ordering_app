@@ -24,14 +24,14 @@ public class NotAvailable extends Activity {
 
         not_available = (TextView) findViewById(R.id.not_available);
 
+        //sets the look of the pop-up windoe
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-
         getWindow().setLayout(((int) (width * .8)), (int) (height * .6));
 
+        //gets the intent from the stock query class
         Intent intent = getIntent();
         String medication = intent.getStringExtra("medication");
         String pharmacy = intent.getStringExtra("pharmacy name");

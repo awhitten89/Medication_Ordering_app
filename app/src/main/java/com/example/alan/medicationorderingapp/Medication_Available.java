@@ -29,19 +29,21 @@ public class Medication_Available extends Activity {
         yes = (Button) findViewById(R.id.btn_reserve);
         cancel = (Button) findViewById(R.id.btn_cancel);
 
+        //sets the look of the display window
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-
         getWindow().setLayout(((int) (width * .8)), (int) (height * .6));
 
         updateUI();
     }
 
+    /**
+     * Informs the user that the medication is available at the pharmacy
+     */
     private void updateUI() {
-
+        //gets intent from the main activity
         Intent intent = getIntent();
         pharmacy_id = intent.getIntExtra("pharmacy id", 0);
         stock_id = intent.getIntExtra("stock id", 0);
@@ -53,10 +55,18 @@ public class Medication_Available extends Activity {
         reserve.setText("Would you like to reserve it?");
     }
 
+    /**
+     * If the cancel button is clicked the user is brought back to the main activity
+     * @param view
+     */
     public void cancel(View view) {
         startActivity(new Intent(Medication_Available.this, MainActivity.class));
     }
 
+    /**
+     * If the confirm button is clicked intent is sent to the update database class
+     * @param view
+     */
     public void medication_reserve(View view) {
 
         Intent pharmacyInfo = new Intent(getApplicationContext(), updateDatabase.class);

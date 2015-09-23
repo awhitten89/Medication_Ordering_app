@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Medication Ordering App</string>
+    <string name="app_name">Medi App</string>
 
     <string name="action_settings">Settings</string>
     <string name="scan_qrcode">scan Qr code</string>

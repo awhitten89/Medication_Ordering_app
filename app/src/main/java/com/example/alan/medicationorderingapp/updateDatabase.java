@@ -28,17 +28,18 @@ public class updateDatabase extends Activity {
 
         setContentView(R.layout.update_database);
 
+        //edit text views which the user will fill in their details
         name = (EditText)findViewById(R.id.enter_name);
         phone = (EditText)findViewById(R.id.enter_phone);
 
+        //implements the look of the pop-up window
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-
         getWindow().setLayout(((int) (width * .8)), (int) (height * .6));
 
+        //gets the intent from the medication available class
         Intent intent = getIntent();
         pharmacy_id = intent.getIntExtra("pharmacy id",0);
         stock_id = intent.getIntExtra("stock id", 0);
@@ -46,7 +47,9 @@ public class updateDatabase extends Activity {
 
     }
 
-    //button which when clicked updates the database.
+    /**
+     * button which when clicked updates the database.
+     */
     public void submit(View view) {
 
         requestData("http://awhitten02.students.cs.qub.ac.uk/update_database.php");//uri passed to the request data method

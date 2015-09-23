@@ -11,7 +11,7 @@ import android.widget.TextView;
 /**
  * Created by Alan on 06/08/2015.
  */
-public class Pop extends Activity {
+public class Confirm_selection extends Activity {
 
     private TextView pharmacyQ, pharmacyID;
     private Button yesBtn;
@@ -22,6 +22,7 @@ public class Pop extends Activity {
 
         setContentView(R.layout.pop_window);
 
+        //set the look of the pop up
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
@@ -33,6 +34,7 @@ public class Pop extends Activity {
         pharmacyID = (TextView) findViewById(R.id.pop_pharmacyID);
         yesBtn = (Button) findViewById(R.id.btn_select_pharmacy);
 
+        //gets the intent from the maps class after an icon has been clicked
         final Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
         final String id = intent.getStringExtra("pharmacy id");
@@ -40,6 +42,7 @@ public class Pop extends Activity {
         pharmacyQ.setText("Select " + name);
         pharmacyID.setText("Pharmacy ID: " + id);
 
+        //button to send intent with the selected pharmacies name and id to the main activity
         yesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

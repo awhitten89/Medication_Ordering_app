@@ -27,18 +27,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //textviews that will display the scan content and the pharmacy name sfter they have been selected
         contentTxt = (TextView)findViewById(R.id.scan_content);
         selectedPharmacy = (TextView)findViewById(R.id.selected_pharmacy);
 
+        //gets the intent from the confirm selection class
         Intent intent = getIntent();
         pharmacy_name = intent.getStringExtra("pharmacy name");
         pharmacy_id = intent.getStringExtra("pharmacy id");
 
+        // if bith the medication and pharmacy are selected they are displayed on the UI
         if(pharmacy_name!=null){
 
+            //pharmacy selection set in a textview
             selectedPharmacy.setText("PHARMACY SELECTED: "+pharmacy_name);
             selectedPharmacy.setBackgroundColor(Color.parseColor("#263238"));
 
+            //file is opened and the medication taken from the QR code is displayed on UI
             try {
                 FileInputStream fin = openFileInput(file);
                 int c;
@@ -139,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
             String stock_id = separated[0];
             String medication = separated[1];
             String quantity = separated[3];
-            //Intent sent to the stock query class giving it the iformation it needs to carry out the
+            //Intent send to the stock query class giving it the information it needs to carry out the
             //stock check.
             Intent dataIntent = new Intent(getApplicationContext(), StockQuery.class);
             //pharmacy name and id have been returned to the main activity after selection on the map

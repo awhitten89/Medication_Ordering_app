@@ -40,7 +40,7 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
-        <activity android:name=".Pop"
+        <activity android:name=".Confirm_selection"
             android:theme="@style/AppTheme.CustomTheme">
         </activity>
         <activity android:name=".StockQuery">
